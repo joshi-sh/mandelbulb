@@ -90,9 +90,9 @@ int iterate(const Vector3f& pos) {
                 Vector3f(sin(theta*8)*cos(phi*8),
                          sin(theta*8)*sin(phi*8),
                          cos(theta*8))) + pos;
-        if (vec3length(c) > 2.0) return i;
+        if (vec3length(c) < 2.0) return i;
     }
-    return i;
+    return -1;
 }
 
 Vector4f Camera::trace(ray_t r, int d) {
