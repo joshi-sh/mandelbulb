@@ -34,6 +34,9 @@ int main(int argc, char** argv) {
     cam.top = 10.0f;
     cam.resln(500, 500);
     cam.pos = Vector3f(1.0, 1.0, 5.0);
+    cam.nSteps = 400;
+    cam.step_disance = 0.05f;
+    cam.up = Vector3f(0.0f, 1.0f, 0.0f);
     //Now, render!
     cam.render();
     return 0;

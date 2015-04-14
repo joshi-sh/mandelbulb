@@ -36,7 +36,6 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 # Object Files
 OBJECTFILES= \
 	${OBJECTDIR}/camera.o \
-	${OBJECTDIR}/distances.o \
 	${OBJECTDIR}/main.o
 
 
@@ -54,30 +53,25 @@ FFLAGS=
 ASFLAGS=
 
 # Link Libraries and Options
-LDLIBSOPTIONS=
+LDLIBSOPTIONS=-L/../../../Downloads/eigen-eigen-10219c95fe65/Eigen
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
-	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/metaballtracer.exe
+	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/mandelbulb.exe
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/metaballtracer.exe: ${OBJECTFILES}
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/mandelbulb.exe: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
-	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/metaballtracer ${OBJECTFILES} ${LDLIBSOPTIONS}
+	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/mandelbulb ${OBJECTFILES} ${LDLIBSOPTIONS}
 
 ${OBJECTDIR}/camera.o: camera.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -I../../../Downloads/eigen-eigen-10219c95fe65 -I/cygdrive/C/Program\ Files/NVIDIA\ GPU\ Computing\ Toolkit/CUDA/v6.5/include -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/camera.o camera.cpp
-
-${OBJECTDIR}/distances.o: distances.cpp 
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -I../../../Downloads/eigen-eigen-10219c95fe65 -I/cygdrive/C/Program\ Files/NVIDIA\ GPU\ Computing\ Toolkit/CUDA/v6.5/include -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/distances.o distances.cpp
+	$(COMPILE.cc) -O2 -I/cygdrive/C/Users/Shubham/Downloads/eigen-eigen-10219c95fe65 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/camera.o camera.cpp
 
 ${OBJECTDIR}/main.o: main.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -I../../../Downloads/eigen-eigen-10219c95fe65 -I/cygdrive/C/Program\ Files/NVIDIA\ GPU\ Computing\ Toolkit/CUDA/v6.5/include -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/main.o main.cpp
+	$(COMPILE.cc) -O2 -I/cygdrive/C/Users/Shubham/Downloads/eigen-eigen-10219c95fe65 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/main.o main.cpp
 
 # Subprojects
 .build-subprojects:
@@ -85,7 +79,7 @@ ${OBJECTDIR}/main.o: main.cpp
 # Clean Targets
 .clean-conf: ${CLEAN_SUBPROJECTS}
 	${RM} -r ${CND_BUILDDIR}/${CND_CONF}
-	${RM} ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/metaballtracer.exe
+	${RM} ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/mandelbulb.exe
 
 # Subprojects
 .clean-subprojects:

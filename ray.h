@@ -1,12 +1,12 @@
 /* 
- * File:   ball.h
+ * File:   ray.h
  * Author: Shubham
  *
  * Created on November 6, 2014, 4:49 PM
  */
 
-#ifndef BALL_H
-#define	BALL_H
+#ifndef RAY_H
+#define	RAY_H
 
 #include <Eigen/Dense>
 #include <stdlib.h>
@@ -29,5 +29,5 @@ typedef struct Light{
     Vector4f intensity;  //Colour: x is red, y is green, b is blue
 } light_t;
 
-#endif	/* BALL_H */
+#endif	/* RAY_H */
 

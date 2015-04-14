@@ -2,13 +2,15 @@
  * File:   camera.h
  * Author: Shubham
  *
+ * The camera to raytrace a scene
+ * 
  * Created on January 29, 2015, 12:44 AM
  */
 
 #ifndef CAMERA_H
 #define	CAMERA_H
 
-#include "ball.h"
+#include "ray.h"
 #include <vector>
 
 using namespace std;
@@ -20,26 +22,27 @@ using namespace std;
 class Camera {
 private:
     
-    static const int nSteps = 100;
-    
     int width, height;
     
     Vector3f h_dir, v_dir;
+    
+    vector<Vector4f> colors;
     
     Vector4f getDir(float, float);
     void renderPixel(int, int);
     
     Vector4f trace(ray_t, int d);
-    Vector4f trace_m(ray_t, int d);
     void setColor(int, int, const Vector4f&);
     
     void write();
     
 public:
+    int nSteps;
     int maxBounces;
     float near, left, right, top, bottom;
+    float step_disance;
     Vector4f background, ambient;
-    vector<Vector4f> colors; //Probably want to move this to private!
+    Vector3f up;
     string out;
     
     Vector3f pos, dir;

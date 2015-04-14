@@ -4,9 +4,8 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
-      <itemPath>ball.h</itemPath>
       <itemPath>camera.h</itemPath>
-      <itemPath>distances.h</itemPath>
+      <itemPath>ray.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
                    displayName="Resource Files"
@@ -16,7 +15,6 @@
                    displayName="Source Files"
                    projectFiles="true">
       <itemPath>camera.cpp</itemPath>
-      <itemPath>distances.cpp</itemPath>
       <itemPath>main.cpp</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
@@ -42,28 +40,22 @@
       <compileType>
         <ccTool>
           <incDir>
-            <pElem>../../../Downloads/eigen-eigen-10219c95fe65</pElem>
-            <pElem>C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v6.5/include</pElem>
+            <pElem>C:/Users/Shubham/Downloads/eigen-eigen-10219c95fe65</pElem>
           </incDir>
         </ccTool>
         <linkerTool>
           <linkerAddLib>
-            <pElem>../../../Downloads/eigen-eigen-10219c95fe65/Eigen</pElem>
-            <pElem>C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v6.5/lib/x64</pElem>
+            <pElem>/../../../Downloads/eigen-eigen-10219c95fe65/Eigen</pElem>
           </linkerAddLib>
         </linkerTool>
       </compileType>
-      <item path="ball.h" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="camera.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="camera.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="distances.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="distances.h" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ray.h" ex="false" tool="3" flavor2="0">
       </item>
     </conf>
     <conf name="Release" type="1">
@@ -79,8 +71,7 @@
         <ccTool>
           <developmentMode>5</developmentMode>
           <incDir>
-            <pElem>../../../Downloads/eigen-eigen-10219c95fe65</pElem>
-            <pElem>C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v6.5/include</pElem>
+            <pElem>C:/Users/Shubham/Downloads/eigen-eigen-10219c95fe65</pElem>
           </incDir>
         </ccTool>
         <fortranCompilerTool>
@@ -89,18 +80,19 @@
         <asmTool>
           <developmentMode>5</developmentMode>
         </asmTool>
+        <linkerTool>
+          <linkerAddLib>
+            <pElem>/../../../Downloads/eigen-eigen-10219c95fe65/Eigen</pElem>
+          </linkerAddLib>
+        </linkerTool>
       </compileType>
-      <item path="ball.h" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="camera.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="camera.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="distances.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="distances.h" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ray.h" ex="false" tool="3" flavor2="0">
       </item>
     </conf>
   </confs>

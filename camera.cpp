@@ -1,5 +1,4 @@
 #include "camera.h"
-#include "distances.h"
 #include <vector>
 #include <algorithm>
 #include <Eigen/Dense>
@@ -17,8 +16,12 @@ void printNamedVector4(string p, Vector4f v) {
     cout << p << ": <" << v[0] << ", " << v[1] << ", " << v[2] << ", " << v[3] << ">" << endl;
 }
 
-Vector4f tov4(Vector3f v) {
+Vector4f tov4(const Vector3f& v) {
     return Vector4f(v[0], v[1], v[2], 0);
+}
+
+float vec3length(const Vector3f& v){
+    return sqrt(abs(v.dot(v)));
 }
 
 void Camera::resln(int w, int h) {
@@ -36,14 +39,14 @@ Vector4f Camera::getDir(float ix, float iy) {
 
 void Camera::renderPixel(int ix, int iy) {
     ray_t ray = {tov4(pos), getDir((float) ix, (float) iy)};
-    Vector4f color = trace_m(ray, 1);
+    Vector4f color = trace(ray, 1);
     setColor(ix, iy, color);
 
 }
 
 void Camera::render() {
     dir = (-1 * pos).normalized();
-    h_dir = (dir.cross(Vector3f(0.0, 1.0, 0.0))).normalized();
+    h_dir = (dir.cross(up)).normalized();
     v_dir = (h_dir.cross(dir)).normalized();
     for (int iy = 0; iy < height; iy++) {
         for (int ix = 0; ix < width; ix++) {
@@ -75,37 +78,10 @@ void Camera::setColor(int ix, int iy, const Vector4f& color) {
     colors[iy2 * width + ix] = color;
 }
 
-float distanceEstimate(const Vector3f& pos) {
-    //    Vector3f p(repeat(pos[0], 2.0f),
-    //            pos[1], repeat(pos[2], 2.0f));
-    return sphere(pos, 1) + wiggles(pos);
-}
-
-Vector4f Camera::trace(ray_t r, int d) {
-    float totalDistance = 0.0f;
-    float val = 0.0f;
-    Vector3f from(r.origin[0], r.origin[1], r.origin[2]);
-    Vector3f direction(r.dir[0], r.dir[1], r.dir[2]);
-    int steps = 0;
-    Vector3f p;
-    for (; steps < nSteps; ++steps) {
-        p = (from + (totalDistance * direction));
-        float distance = distanceEstimate(p);
-        totalDistance += distance;
-        if (distance < 0.0001f) break;
-    }
-    val = 1.0f - (float) (steps) / (float) (nSteps);
-    Vector4f color(255, 255, 255, 0);
-    float fg = 1 - exp(-0.01 * totalDistance * totalDistance);
-    Vector4f fog(fg * 63.0f, fg * 63.0f, fg * 63.0f, 0);
-    return ((1.0f - fg) * val * color) +fog;
-    //return val * color;
-}
-
 int iterate(const Vector3f& pos) {
     Vector3f c(pos[0], pos[1], pos[2]);
-    float pi = 3.14159265;
-    for (int i = 0; i < 100; ++i) {
+    int i = 0;
+    for (; i < 100; ++i) {
         float x = c[0], y = c[1], z = c[2];
         float r = sqrt(x*x + y*y + z*z);
         float theta = atan2(sqrt(x*x + y*y), z);
@@ -114,21 +90,21 @@ int iterate(const Vector3f& pos) {
                 Vector3f(sin(theta*8)*cos(phi*8),
                          sin(theta*8)*sin(phi*8),
                          cos(theta*8))) + pos;
-        if (vec3length(c) < 2.0) return i;
+        if (vec3length(c) > 2.0) return i;
     }
-    return -1;
+    return i;
 }
 
-Vector4f Camera::trace_m(ray_t r, int d) {
+Vector4f Camera::trace(ray_t r, int d) {
     Vector3f from(r.origin[0], r.origin[1], r.origin[2]);
     Vector3f direction(r.dir[0], r.dir[1], r.dir[2]);
     int steps = 0;
     Vector3f p;
-    for (; steps < 400; ++steps) {
-        p = from + (direction * steps * 0.05f);
+    for (; steps < nSteps; ++steps) {
+        p = from + (direction * steps * step_disance);
         int i = iterate(p);
         if (i > -1) {
-            float factor = ((float) i) / 100.0f;
+            float factor = 1.0f - ((float) i) / 100.0f;
             return factor * Vector4f(255.0f, 255.0f, 255.0f, 0.0f);
         }
     }
